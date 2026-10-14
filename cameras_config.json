@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "CAM 01 - PHÒNG GPL",
+    "url": "rtsp://admin:1234Admin@192.168.100.4:554/cam/realmonitor?channel=1&subtype=0",
+    "location": "Phòng GPL Lầu 4",
+    "enabled": false
+  },
+  {
+    "id": 2,
+    "name": "CAM 02 - NHÀ ĂN 1",
+    "url": "rtsp://admin:1234admin@192.168.100.154:554/cam/realmonitor?channel=1&subtype=0",
+    "location": "Khu vực Nhà Ăn 1",
+    "enabled": true
+  },
+  {
+    "id": 3,
+    "name": "CAM 03 - LỐI ĐI CẦU THANG NHÀ ĂN",
+    "url": "rtsp://admin:1234Admin@192.168.100.127:554/cam/realmonitor?channel=1&subtype=0",
+    "location": "Lối đi Cầu thang Nhà ăn",
+    "enabled": true
+  },
+  {
+    "id": 4,
+    "name": "CAM 04 - NHÀ ĂN 2",
+    "url": "rtsp://admin:1234Admin@192.168.100.5:554/cam/realmonitor?channel=1&subtype=0",
+    "location": "Khu vực Nhà Ăn 2 (Lầu Lửng)",
+    "enabled": true
+  }
+]

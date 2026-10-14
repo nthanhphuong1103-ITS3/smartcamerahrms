@@ -1,0 +1,129 @@
+﻿STT,Mã NV,Họ và Tên,Chức Danh,Phòng Ban,Công Ty,Trạng Thái,Email,Điện Thoại,Nơi Làm Việc
+1,NV0000,NGUYỄN THANH HÂN,Cố vấn cấp cao,BAN GIÁM ĐỐC,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Đang làm việc,csa@genuinepartner.com,0909116668,VĂN PHÒNG TỔNG CÔNG TY
+2,NV0001,VŨ THỊ TÚ UYÊN,Chủ tịch Hội đồng quản trị,BAN GIÁM ĐỐC,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Đang làm việc,chairwoman@genuinepartner.com,0919116668,VĂN PHÒNG TỔNG CÔNG TY
+3,NV0005,LÊ THANH TUẤN,Giám đốc,BAN GIÁM ĐỐC,CÔNG TY CỔ PHẦN DỊCH VỤ KỸ THUẬT AZ,Đang làm việc,director1@azteco.tech,0828116668,VĂN PHÒNG TỔNG CÔNG TY
+4,NV0038,NGUYỄN TIẾN DŨNG,Giám đốc,BAN GIÁM ĐỐC,CÔNG TY CỔ PHẦN TẬP ĐOÀN VỮNG AN,Đang làm việc,director1@steedygroup.com,0844116668,VĂN PHÒNG TỔNG CÔNG TY
+5,NV0046,NGUYỄN TRÍ HUY,Nhân viên Tiền sảnh & An ninh,BAN BẢO VỆ,CÔNG TY CỔ PHẦN TẬP ĐOÀN VỮNG AN,Đang làm việc,--,0907880828,VĂN PHÒNG TỔNG CÔNG TY
+6,NV0051,NHAN QUỐC VŨ,Trưởng nhóm Tiền sảnh & An ninh,BAN BẢO VỆ,CÔNG TY CỔ PHẦN TẬP ĐOÀN VỮNG AN,Đang làm việc,operator1@igcmar.com,0909728123,VĂN PHÒNG TỔNG CÔNG TY
+7,NV0451,LÊ VĂN QUYỀN,Trợ lý Giám đốc,CÔNG TY TNHH KHAI THÁC CẢNG CÁI MÉP THỊ VẢI,CÔNG TY TNHH KHAI THÁC CẢNG CÁI MÉP THỊ VẢI,Đang làm việc,director1@icdcaimepthivai.com,0987116668,VĂN PHÒNG TỔNG CÔNG TY
+8,NV0975,HUỲNH THỊ TỈNH,Giám đốc,BAN GIÁM ĐỐC,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,acc.supervisor1@dongsaigonfirm.com,0949116668,VĂN PHÒNG TỔNG CÔNG TY
+9,NV1052,NGUYỄN KIM THÙY MINH,Trợ lý cấp cao của Giám Đốc,BAN GIÁM ĐỐC,CÔNG TY CỔ PHẦN TẬP ĐOÀN VỮNG AN,Đang làm việc,assistant1@steedygroup.com,0924116668,VĂN PHÒNG TỔNG CÔNG TY
+10,NV1126,HOÀNG LÊ CÔNG THÀNH,Nhân viên vận hành,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,no.reply1@ltacv.com,0335787344,VĂN PHÒNG TỔNG CÔNG TY
+11,NV1182,NGUYỄN VĂN QUANG,Giám đốc,Ban Giám Đốc,CÔNG TY TNHH GIẢI PHÁP CONTAINER VN,Đang làm việc,director1@viconso.com,0972116979,VĂN PHÒNG TỔNG CÔNG TY
+12,NV1232,PHẠM DUY BÌNH,Nhân viên vận hành,CÔNG TY TNHH QUẢN LÝ NỀN TẢNG KẾT NỐI,CÔNG TY TNHH QUẢN LÝ NỀN TẢNG KẾT NỐI,Đang làm việc,info@npmplatform.com,0779190599,VĂN PHÒNG TỔNG CÔNG TY
+13,NV1443,NGUYỄN HỮU THỌ,Nhân viên vận hành,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,no.reply1@ltacv.com,0362352103,VĂN PHÒNG TỔNG CÔNG TY
+14,NV1801,LÊ GIA THỨC,Giám đốc,Ban Giám đốc,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,president@genuinepartner.com,0967116668,VĂN PHÒNG TỔNG CÔNG TY
+15,NV2193,HỒ THỊ TRANG,Trợ lý Giám đốc,Ban Giám Đốc,CÔNG TY TNHH GIẢI PHÁP CONTAINER VN,Đang làm việc,vice.director1@log.genuinepartner.com,0585116668,VĂN PHÒNG TỔNG CÔNG TY
+16,NV2205,NGUYỄN THÀNH CÔNG,Nhân viên báo giá,BAN BÁO GIÁ,CÔNG TY TNHH GIẢI PHÁP CONTAINER VN,Đang làm việc,eor.supervisor1@viconso.com,0397222789,VĂN PHÒNG TỔNG CÔNG TY
+17,NV2425,LÊ THỊ LOAN,Kế toán thanh toán,BAN KẾ TOÁN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,acc1@dongsaigonfirm.com,0973770176,VĂN PHÒNG TỔNG CÔNG TY
+18,NV2542,LÊ THỊ HẰNG,Kế toán trưởng,BAN KẾ TOÁN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,acc.supervisor2@dongsaigonfirm.com,0396116668,VĂN PHÒNG TỔNG CÔNG TY
+19,NV2656,TRẦN KHẮC NHI,Trợ lý bộ phận sửa chữa container,PHÒNG VẬN TẢI,CÔNG TY TNHH GIẢI PHÁP CONTAINER VN,Đang làm việc,planner1@log.genuinepartner.com,0939088669,VĂN PHÒNG TỔNG CÔNG TY
+20,NV2851,TRẦN CÔNG CƯỜNG,Trưởng ca,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,ops-centralize@edepots.com,0974999353,VĂN PHÒNG TỔNG CÔNG TY
+21,NV2855,TRẦN DỰ ĐỊNH,Trưởng ca,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,ops-centralize@edepots.com,0987288626,VĂN PHÒNG TỔNG CÔNG TY
+22,NV2995,NGUYỄN THỊ MỸ HẢI,Thủ quỹ,BAN KẾ TOÁN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,cashier1@dongsaigonfirm.com,0971160138,VĂN PHÒNG TỔNG CÔNG TY
+23,NV3133,PHẠM THỊ YẾN NHI,Phó chánh văn phòng,BAN PHÁP CHẾ,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,office1@yswcvn.org,0912116668,VĂN PHÒNG TỔNG CÔNG TY
+24,NV3239,TRẦN THỊ KIỀU PHƯƠNG,Trợ lý Tổng Giám đốc,BAN GIÁM ĐỐC,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Đang làm việc,assistant1@itc.genuinepartner.com,0965116668,VĂN PHÒNG TỔNG CÔNG TY
+25,NV3269,NGUYỄN MINH NHẬT,Nhân viên báo giá,BAN BÁO GIÁ,CÔNG TY TNHH GIẢI PHÁP CONTAINER VN,Đang làm việc,eor4@viconso.com,0792265941,VĂN PHÒNG TỔNG CÔNG TY
+26,NV3283,DƯƠNG THỊ TRÂM,Kế toán thuế,BAN KẾ TOÁN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,acc4@dongsaigonfirm.com,0365729430,VĂN PHÒNG TỔNG CÔNG TY
+27,NV3326,CAO DUY TRƯỜNG,Giám đốc,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,director1@ltacv.com,0886116668,VĂN PHÒNG TỔNG CÔNG TY
+28,NV3366,NGUYỄN NHẬT MINH,Nhân viên báo giá,BAN BÁO GIÁ,CÔNG TY TNHH GIẢI PHÁP CONTAINER VN,Đang làm việc,Eor3@viconso.com,0326096726,VĂN PHÒNG TỔNG CÔNG TY
+29,NV3539,ĐOÀN THIÊN LỘC,Tài xế BOD,Ban Nội chính,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,--,0907771419,VĂN PHÒNG TỔNG CÔNG TY
+30,NV3676,NGUYỄN TRƯỜNG AN,Nhân viên lập trình WebApp,PHÒNG LẬP TRÌNH WEBAPP,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,dev.web3@ltacv.com,0365771978,VĂN PHÒNG TỔNG CÔNG TY
+31,NV3698,MAI THẾ MINH,Tài xế BOD,Ban Nội chính,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,--,0975140194,VĂN PHÒNG TỔNG CÔNG TY
+32,NV3725,NGUYỄN BÁ CHÂU,Nhân viên quản lý tòa nhà,BAN XÂY DỰNG CƠ BẢN,CÔNG TY CỔ PHẦN TẬP ĐOÀN VỮNG AN,Đang làm việc,building1@steedygroup.com,0938599681,VĂN PHÒNG TỔNG CÔNG TY
+33,NV3729,CAO THÁI DƯƠNG,Nhân viên phân tích cơ sở dữ liệu,PHÒNG PHÂN TÍCH NGHIỆP VỤ - TRIỂN KHAI,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,designer1@ltacv.com,0344964979,VĂN PHÒNG TỔNG CÔNG TY
+34,NV3731,NGUYỄN HOÀNG PHÚC,Nhân viên lập trình WebApp,PHÒNG LẬP TRÌNH WEBAPP,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,dev.web1@ltacv.com,0932898438,VĂN PHÒNG TỔNG CÔNG TY
+35,NV3752,VÕ THỊ GẤM,Kế toán thuế,BAN KẾ TOÁN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,acc.supervisor5@dongsaigonfirm.com,0901867879,VĂN PHÒNG TỔNG CÔNG TY
+36,NV3761,HỒ ANH TUẤN,Nhân viên vận hành,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,no.reply1@ltacv.com,0327358153,VĂN PHÒNG TỔNG CÔNG TY
+37,NV3807,NGUYỄN MINH LUÂN,Tài xế BOD,Ban Nội chính,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,--,0362040924. -  0772920979,VĂN PHÒNG TỔNG CÔNG TY
+38,NV3811,NGUYỄN TRẦN HẢI YẾN,Phó Giám đốc kiêm Giám đốc Trung tâm Quản lý Chất lượng Dịch vụ,Ban Giám đốc,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,director1@viconso.com,0768116668,VĂN PHÒNG TỔNG CÔNG TY
+39,NV3826,VÕ LÂM PHƯỚC THIỆN,Nhân viên cung ứng,BAN CUNG ỨNG,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,security1@dongsaigonfirm.com,0373772680,VĂN PHÒNG TỔNG CÔNG TY
+40,NV3832,LÊ MẠNH CƯỜNG,Nhân viên vận hành,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,--,0337066294,VĂN PHÒNG TỔNG CÔNG TY
+41,NV3836,NGUYỄN THỊ HỘI,Nhân viên phụ bếp,BAN NỘI CHÍNH,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Đang làm việc,--,0942539187,VĂN PHÒNG TỔNG CÔNG TY
+42,NV3860,LÊ NGỌC KHOA,Nhân Viên IT,BAN HẠ TẦNG CNTT,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,Its2@ltacv.com,0337175835,VĂN PHÒNG TỔNG CÔNG TY
+43,NV3865,NGUYỄN GIA BẢO,Quyền Phó trung tâm điều phối dịch vụ container,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,depot.supporter1@edepots.com,0868877946,VĂN PHÒNG TỔNG CÔNG TY
+44,NV3866,HỒ TẤN THÀNH,Tổ phó chất lượng hệ thống phần mềm,PHÒNG CHẤT LƯỢNG HỆ THỐNG PHẦN MỀM,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,qc.supervisor1@ltacv.com,0772912714,VĂN PHÒNG TỔNG CÔNG TY
+45,NV3892,TRẦN MINH HUY,Nhân viên Chăm sóc khách hàng trực tuyến,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,cse1@depot.genuinepartner.com,0777751306,VĂN PHÒNG TỔNG CÔNG TY
+46,NV3900,PHẠM THỊ HOÀI,Nhân viên hành chính văn phòng,BAN NỘI CHÍNH,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Đang làm việc,sgn.receptionist1@genuinepartner.com,0983883787,VĂN PHÒNG TỔNG CÔNG TY
+47,NV3926,HỒ MINH VIỆT,Nhân viên chứng từ,TỔ CHỨNG TỪ,CÔNG TY TNHH MTV LOGISTICS ĐỐI TÁC CHÂN THẬT,Đang làm việc,doc1@log.genuinepartner.com,0823335789,VĂN PHÒNG TỔNG CÔNG TY
+48,NV3941,NGUYỄN THỊ BÍCH PHƯỢNG,Nhân viên tạp vụ,BAN NỘI CHÍNH,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Đang làm việc,--,0385489904,VĂN PHÒNG TỔNG CÔNG TY
+49,NV4007,NGUYỄN TẤN CHIẾN,Thư ký Giám đốc,Ban Giám Đốc,CÔNG TY TNHH GIẢI PHÁP CONTAINER VN,Đang làm việc,assistant1@viconso.com,0971691292,VĂN PHÒNG TỔNG CÔNG TY
+50,NV4031,NGUYỄN QUỐC DUY,Thư ký Chủ tịch,TỔ SỰ KIỆN,CÔNG TY TNHH TRUYỀN THÔNG QUỐC TẾ CHÂN THẬT,Đang làm việc,info@igcmar.com,0902928229,VĂN PHÒNG TỔNG CÔNG TY
+51,NV4053,ĐINH TẤT ĐẠT,Nhân viên vận hành,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,--,0973182959,VĂN PHÒNG TỔNG CÔNG TY
+52,NV4083,LÊ MINH CƯỜNG,Nhân viên quản lý tòa nhà,BAN XÂY DỰNG CƠ BẢN,CÔNG TY CỔ PHẦN TẬP ĐOÀN VỮNG AN,Đang làm việc,--,0357172454,VĂN PHÒNG TỔNG CÔNG TY
+53,NV4147,NGUYỄN ĐỨC NHÂN,Nhân viên Tiền sảnh & An ninh,BAN BẢO VỆ,CÔNG TY CỔ PHẦN TẬP ĐOÀN VỮNG AN,Đang làm việc,--,0919525601,VĂN PHÒNG TỔNG CÔNG TY
+54,NV4152,TRẦN NHỰT QUANG,Nhân viên thiết kế,TỔ THIẾT KẾ,CÔNG TY TNHH TRUYỀN THÔNG QUỐC TẾ CHÂN THẬT,Đang làm việc,design1@igcmar.com,0909577725,VĂN PHÒNG TỔNG CÔNG TY
+55,NV4234,NGUYỄN NGỌC CHIẾN,Trợ lý Giám đốc,Ban Giám Đốc,CÔNG TY TNHH GIẢI PHÁP CONTAINER VN,Đang làm việc,assistant3@viconso.com,0938215214,VĂN PHÒNG TỔNG CÔNG TY
+56,NV4294,NGUYỄN HOÀNG MINH THUẬN,Nhân viên vận hành,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,--,0788366926,VĂN PHÒNG TỔNG CÔNG TY
+57,NV4356,NGUYỄN TRƯỜNG THANH,Nhân viên khai báo hải quan,CÔNG TY CỔ PHẦN TIẾP VẬN TÂN CẢNG - BÌNH DƯƠNG,CÔNG TY CỔ PHẦN TIẾP VẬN TÂN CẢNG - BÌNH DƯƠNG,Đang làm việc,--,0866290988,VĂN PHÒNG TỔNG CÔNG TY
+58,NV4369,ĐẶNG ĐỨC KHÔI,Nhân viên báo giá,BAN BÁO GIÁ,CÔNG TY TNHH GIẢI PHÁP CONTAINER VN,Đang làm việc,secretary1@viconso.com,0907672160,VĂN PHÒNG TỔNG CÔNG TY
+59,NV4376,HOÀNG NỮ THU THÚY,Thư ký Giám đốc,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,secretary1@depot.genuinepartner.com,0909618179,VĂN PHÒNG TỔNG CÔNG TY
+60,NV4433,NGUYỄN PHẠM KỲ ĐIỀN,Nhân viên lập trình WebApp,PHÒNG LẬP TRÌNH WEBAPP,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,--,0358788658,VĂN PHÒNG TỔNG CÔNG TY
+61,NV4481,ĐẶNG TRẦN LONG,Kế toán viên,BAN KẾ TOÁN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,acc6@dongsaigonfirm.com,0932694595,VĂN PHÒNG TỔNG CÔNG TY
+62,NV4492,NGÔ THANH HƯNG,Chuyên viên phát triển phần mềm,PHÒNG LẬP TRÌNH WEBAPP,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,dev.web2@ltacv.com,0876555543,VĂN PHÒNG TỔNG CÔNG TY
+63,NV4528,NGUYỄN MINH TUẤN,Nhân viên Chăm sóc khách hàng trực tuyến,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,assistant1@log.genuinepartner.com,0974281655,VĂN PHÒNG TỔNG CÔNG TY
+64,NV4531,ĐÀO MINH TUẤN,Nhân Viên IT,BAN HẠ TẦNG CNTT,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,its1@ltacv.com,0389906656,VĂN PHÒNG TỔNG CÔNG TY
+65,NV4536,VÕ TRỌNG HIẾU,Nhân viên Pháp chế,BAN PHÁP CHẾ,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,legal3@dongsaigonfirm.com,0968285469,VĂN PHÒNG TỔNG CÔNG TY
+66,NV4547,NGUYỄN THANH PHONG,Nhân viên phát triển phần mềm,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,dev.web4@ltacv.com,0968559177,VĂN PHÒNG TỔNG CÔNG TY
+67,NV4555,NGUYỄN QUỐC NAM,Nhân viên phân tích cơ sở dữ liệu,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,ba.iso1@ltacv.com,0937221228,VĂN PHÒNG TỔNG CÔNG TY
+68,NV4556,VŨ HẢI QUÂN,Thư ký Giám đốc,Ban Giám đốc,CÔNG TY TNHH MTV LOGISTICS ĐỐI TÁC CHÂN THẬT,Đang làm việc,secretary1@log.genuinepartner.com,0786262499,VĂN PHÒNG TỔNG CÔNG TY
+69,NV4562,CAO HOÀNG DIỆU,Chuyên viên phát triển phần mềm,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,dev.web5@ltacv.com,0347861843,VĂN PHÒNG TỔNG CÔNG TY
+70,NV4576,PHÙNG THỊ THANH LỆ,Nhân viên tạp vụ,BAN BẢO VỆ,CÔNG TY CỔ PHẦN TẬP ĐOÀN VỮNG AN,Đang làm việc,--,0909681200,VĂN PHÒNG TỔNG CÔNG TY
+71,NV4579,NGUYỄN THỊ NGỌC ĐOAN,Trợ lý Chủ tịch - Phụ trách đào tạo văn hóa doanh nghiệp,BAN VĂN PHÒNG CHỦ TỊCH,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Đang làm việc,assistant1@genuinepartner.com,0977491468,VĂN PHÒNG TỔNG CÔNG TY
+72,NV4607,NGUYỄN MẠNH CƯỜNG,Nhân viên hành chính văn phòng,BAN NỘI CHÍNH,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Đang làm việc,sgn.receptionist1@genuinepartner.com,0982867157,VĂN PHÒNG TỔNG CÔNG TY
+73,NV4637,NGUYỄN VIẾT THÀNH,Phó ban cung ứng,BAN CUNG ỨNG,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,procurement2@dongsaigonfirm.com,0909397139,VĂN PHÒNG TỔNG CÔNG TY
+74,NV4639,LÊ TRIỆU THANH AN,Thư ký Phó Giám đốc,Ban Giám đốc,CÔNG TY TNHH MTV LOGISTICS ĐỐI TÁC CHÂN THẬT,Đang làm việc,sgn.cse1@log.genuinepartner.com,0347203738,VĂN PHÒNG TỔNG CÔNG TY
+75,NV4642,NGUYỄN THANH PHƯƠNG,Nhân Viên IT,BAN HẠ TẦNG CNTT,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,its3@ltacv.com,0332594660,VĂN PHÒNG TỔNG CÔNG TY
+76,NV4646,LẠI THỊ KIM HỒNG,Nhân viên Chăm sóc khách hàng nhà vận tải,TRUNG TÂM CHĂM SÓC KHÁCH HÀNG,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,--,0792563117,VĂN PHÒNG TỔNG CÔNG TY
+77,NV4663,NGUYỄN THỊ KIM NGÂN,Kế toán Nghiệp vụ tổng hợp,BAN KẾ TOÁN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,--,0988265820,VĂN PHÒNG TỔNG CÔNG TY
+78,NV4668,LÊ MINH HIẾU,Nhân viên Chăm sóc khách hàng trực tuyến,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,--,0818139654,VĂN PHÒNG TỔNG CÔNG TY
+79,NV4682,NGUYỄN THỊ KIỀU OANH,Chuyên viên tuyển dụng,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,recruitment2@dongsaigonfirm.com,0931853531,VĂN PHÒNG TỔNG CÔNG TY
+80,NV4689,TRƯƠNG HỮU TÀI,Chuyên viên tuyển dụng,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,recruitment.lead1@dongsaigonfirm.com,0916899402,VĂN PHÒNG TỔNG CÔNG TY
+81,NV4690,LÝ XUÂN SANG,Nhân viên lập trình WebApp,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,dev.web6@ltacv.com,0325401321,VĂN PHÒNG TỔNG CÔNG TY
+82,NV4692,CHẾ QUANG HUY,Nhân viên lập trình WebApp,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Đang làm việc,dev.web7@ltacv.com,0939260508,VĂN PHÒNG TỔNG CÔNG TY
+83,NV4711,LÊ THỊ BÍCH DIỆU,Kế toán Nghiệp vụ tổng hợp,BAN KẾ TOÁN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,--,0339606871,VĂN PHÒNG TỔNG CÔNG TY
+84,NV4712,PHẠM MỘNG THANH HẰNG,Chuyên viên tuyển dụng,TỔ TUYỂN DỤNG,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,recruitment2@dongsaigonfirm.com,0987169424,VĂN PHÒNG TỔNG CÔNG TY
+85,NV4713,JEONG HYUN MOOK,Giám đốc,Ban Giám đốc,CÔNG TY TNHH MTV LOGISTICS ĐỐI TÁC CHÂN THẬT,Đang làm việc,ceo@log.genuinepartner.com,0899116668,VĂN PHÒNG TỔNG CÔNG TY
+86,NV4723,NGUYỄN LINH THẢO,Phó Chánh văn phòng - Ban Pháp chế,BAN PHÁP CHẾ,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,secretary1@genuinepartner.com,0969451169,VĂN PHÒNG TỔNG CÔNG TY
+87,NV4726,TRẦN DUY LUẬN,Nhân viên quản lý tòa nhà,CÔNG TY CỔ PHẦN TẬP ĐOÀN VỮNG AN,CÔNG TY CỔ PHẦN TẬP ĐOÀN VỮNG AN,Đang làm việc,--,0855674768,VĂN PHÒNG TỔNG CÔNG TY
+88,NV4742,ĐÀO THỊ THƠ,Chuyên viên Pháp chế,BAN PHÁP CHẾ,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,Legal1@dongsaigonfirm.com,0355680707,VĂN PHÒNG TỔNG CÔNG TY
+89,NV4762,NGUYỄN THỊ NHƯ HIỀN,Nhân viên cung ứng,BAN CUNG ỨNG,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,Procurement1@dongsaigonfirm.com,0984730376,VĂN PHÒNG TỔNG CÔNG TY
+90,NV4763,NGUYỄN MINH TRANG,Nhân viên Digital Marketing,CÔNG TY TNHH TRUYỀN THÔNG QUỐC TẾ CHÂN THẬT,CÔNG TY TNHH TRUYỀN THÔNG QUỐC TẾ CHÂN THẬT,Đang làm việc,Office1@igcmar.com,0794754882,VĂN PHÒNG TỔNG CÔNG TY
+91,NV4765,LÝ GIA HUY,Nhân viên CMS/Hotline/Trực văn phòng TCT,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Đang làm việc,--,0847218639,VĂN PHÒNG TỔNG CÔNG TY
+92,NV4766,LÊ THỊ KIM LOAN,Thư ký Cố vấn Cấp cao,Ban Trợ lý - Thư ký,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Đang làm việc,office2@genuinepartner.com,0776280791,VĂN PHÒNG TỔNG CÔNG TY
+93,NV4776,PHẠM PHƯƠNG ANH,Phó Tổng Quản Lý,Tổng Quản Lý,CÔNG TY TNHH MTV LOGISTICS ĐỐI TÁC CHÂN THẬT,Đang làm việc,Vice.Director1@log.genuinepartner.com,0915517771,VĂN PHÒNG TỔNG CÔNG TY
+94,NV4778,NGUYỄN NGỌC MINH SƯƠNG,Nhân viên văn thư,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Đang làm việc,legal6@dongsaigonfirm.com,0837456869,VĂN PHÒNG TỔNG CÔNG TY
+95,NV4790,LÊ QUỐC HUY,Nhân viên bếp,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Đang làm việc,--,0768990929,VĂN PHÒNG TỔNG CÔNG TY
+96,NV4798,NGUYỄN THỊ DIỄM PHƯƠNG,Phó ban Pháp chế,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Thử việc,legal.supervisor2@dongsaigonfirm.com,0368288651,VĂN PHÒNG TỔNG CÔNG TY
+97,NV4802,NGUYỄN LÊ TRUNG AN,Nhân viên quản lý tài sản,BAN CUNG ỨNG,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Thử việc,--,0907549345,VĂN PHÒNG TỔNG CÔNG TY
+98,NV4803,NGUYỄN THỊ HỒNG CẨM,Kế toán Nghiệp vụ tổng hợp,BAN KẾ TOÁN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Thử việc,--,0929465423,VĂN PHÒNG TỔNG CÔNG TY
+99,NV4804,HỒ VĨNH PHÚC,Thư ký Phó Giám đốc,Ban Giám đốc,CÔNG TY TNHH MTV LOGISTICS ĐỐI TÁC CHÂN THẬT,Thử việc,--,0397496513,VĂN PHÒNG TỔNG CÔNG TY
+100,NV4807,KHUẤT DƯƠNG THẾ HÀO,Trưởng nhóm tuyển dụng,BAN NHÂN SỰ,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Thử việc,--,0764465803,VĂN PHÒNG TỔNG CÔNG TY
+101,NV4809,ĐỖ GIA HUẤN,Nhân viên lập trình WebApp,PHÒNG LẬP TRÌNH WEBAPP,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Thử việc,--,0855376268,VĂN PHÒNG TỔNG CÔNG TY
+102,NV4813,TRẦN THỊ THU PHƯƠNG,Nhân viên văn thư,Trung tâm Quản lý chất lượng dịch vụ,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Thử việc,legal4@dongsaigonfirm.com,0853535317,VĂN PHÒNG TỔNG CÔNG TY
+103,NV4817,PHẠM NHƯ QUỲNH,Thư ký Chủ tịch,TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Thử việc,--,0902061914,VĂN PHÒNG TỔNG CÔNG TY
+104,NV4820,HỒ NGUYỄN ĐĂNG KHOA,Chuyên viên ISO,Trung tâm Quản lý chất lượng dịch vụ,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Thử việc,Qms2@lttci.com,0918618349,VĂN PHÒNG TỔNG CÔNG TY
+105,NV4824,ĐẶNG ĐỨC TÍN,Chuyên viên Quản trị dữ liệu,Trung tâm điều phối Dịch vụ Container,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Thử việc,--,0772092448,VĂN PHÒNG TỔNG CÔNG TY
+106,NV4825,NGUYỄN THỊ THU HÀ,Phó chánh văn phòng,CÔNG TY TNHH CỘNG ĐỒNG CÔNG TÁC XÃ HỘI VIỆT NAM,CÔNG TY TNHH CỘNG ĐỒNG CÔNG TÁC XÃ HỘI VIỆT NAM,Thử việc,--,0982179492,VĂN PHÒNG TỔNG CÔNG TY
+107,NV4829,HOÀNG THÁI DƯƠNG,Nhân Viên IT,BAN HẠ TẦNG CNTT,Công ty Cổ Phần Ứng Dụng Công Nghệ Logistics,Thử việc,--,0912947179,VĂN PHÒNG TỔNG CÔNG TY
+108,NV4835,ĐINH THỊ TRÚC ANH,Nhân viên hành chính văn phòng,BAN NỘI CHÍNH,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Thử việc,--,0903141816,VĂN PHÒNG TỔNG CÔNG TY
+109,NV4836,NGUYỄN PHI TRƯỜNG,Nhân viên vận hành,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Thử việc,--,0913732884,VĂN PHÒNG TỔNG CÔNG TY
+110,NV4837,NGUYỄN NHƯ Ý,Nhân viên hành chính văn phòng,BAN NỘI CHÍNH,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Thử việc,--,0394392208,VĂN PHÒNG TỔNG CÔNG TY
+111,NV4839,NGUYỄN HỮU QUYỀN,Nhân viên thiết kế,TỔ THIẾT KẾ,CÔNG TY TNHH TRUYỀN THÔNG QUỐC TẾ CHÂN THẬT,Thử việc,--,0373196391,VĂN PHÒNG TỔNG CÔNG TY
+112,NV4840,NGUYỄN NHẬT QUANG,Quản lý Bộ phận Hotline,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Thử việc,--,0787527471,VĂN PHÒNG TỔNG CÔNG TY
+113,NV4856,VÕ NGỌC BẢO CHÂU,Chuyên viên tuyển dụng,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Thử việc,--,0942275922,VĂN PHÒNG TỔNG CÔNG TY
+114,NV4857,TRẦN NGỌC NGHĨA,Nhân viên báo giá,CÔNG TY TNHH GIẢI PHÁP CONTAINER VN,CÔNG TY TNHH GIẢI PHÁP CONTAINER VN,Thử việc,--,0869148204,VĂN PHÒNG TỔNG CÔNG TY
+115,NV4859,PHẠM LÊ HOÀNG MY,Nhân viên cung ứng,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Thử việc,--,0794385277,VĂN PHÒNG TỔNG CÔNG TY
+116,NV4860,BÙI HỮU VĨ,Phó Giám Đốc,Ban Giám Đốc,CÔNG TY TNHH GIẢI PHÁP CONTAINER VN,Thử việc,vice.director1@viconso.com,0906625666,VĂN PHÒNG TỔNG CÔNG TY
+117,NV4861,TRỊNH KIM NGỌC,Nhân viên cung ứng,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Thử việc,Procurement1@dongsaigonfirm.com,0971205997,VĂN PHÒNG TỔNG CÔNG TY
+118,NV4864,TRẦN THỊ THANH VÂN,Phó trung tâm kiểm soát tài chính,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Thử việc,--,0902497868,VĂN PHÒNG TỔNG CÔNG TY
+119,NV4865,TRẦN HÒA YÊN,Giám đốc,BAN GIÁM ĐỐC,CÔNG TY TNHH TRUYỀN THÔNG QUỐC TẾ CHÂN THẬT,Thử việc,--,0982839453,VĂN PHÒNG TỔNG CÔNG TY
+120,NV4867,NGUYỄN LÊ ĐÌNH PHƯỚC,Tài xế BOD,Ban Nội chính,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Thử việc,--,0971194016,VĂN PHÒNG TỔNG CÔNG TY
+121,NV4868,HỒ XUÂN VINH,Tài xế BOD,Ban Nội chính,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Thử việc,--,0932113676,VĂN PHÒNG TỔNG CÔNG TY
+122,NV4869,NGUYỄN HỮU ĐẮC,Tài xế BOD,Ban Nội chính,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Thử việc,--,0907399152,VĂN PHÒNG TỔNG CÔNG TY
+123,NV4870,VƯƠNG MẠNH CƯỜNG,Trưởng nhóm tuyển dụng,BAN NHÂN SỰ,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Thử việc,--,0968995291,VĂN PHÒNG TỔNG CÔNG TY
+124,NV4871,NGUYỄN HOÀNG PHÚC,Chuyên viên tuyển dụng,BAN NHÂN SỰ,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Thử việc,--,0922133020,VĂN PHÒNG TỔNG CÔNG TY
+125,NV4872,HUỲNH THỤY THANH THẢO,Chuyên viên Điều phối và Đối ngoại,OCSA Văn phòng Cố vấn cấp cao,CÔNG TY TNHH TẬP ĐOÀN ĐỐI TÁC CHÂN THẬT,Thử việc,--,0903537004,VĂN PHÒNG TỔNG CÔNG TY
+126,NV4873,NGUYỄN DƯƠNG LINH THẢO,Thư ký Giám đốc,Ban Giám đốc,CÔNG TY CỔ PHẦN ĐỐI TÁC CHÂN THẬT,Thử việc,--,0934008977,VĂN PHÒNG TỔNG CÔNG TY
+127,NV4875,NGUYỄN MAI HÂN,Nhân viên tổ chức sự kiện,CÔNG TY TNHH TRUYỀN THÔNG QUỐC TẾ CHÂN THẬT,CÔNG TY TNHH TRUYỀN THÔNG QUỐC TẾ CHÂN THẬT,Thử việc,--,0367063277,VĂN PHÒNG TỔNG CÔNG TY
+128,NV4878,EUGEN TARANOWSKI,Giám đốc,BAN GIÁM ĐỐC,CÔNG TY TNHH TƯ VẤN ĐẦU TƯ ĐÔNG SÀI GÒN,Thử việc,director1@npmplatform.com,0392276129,VĂN PHÒNG TỔNG CÔNG TY

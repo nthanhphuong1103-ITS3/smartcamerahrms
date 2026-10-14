@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART FACIAL ATTENDANCE KIOSK - ENTERPRISE CHECK-IN SYSTEM</title>
+    <!-- Google Fonts: Be Vietnam Pro & Inter for 100% perfect Vietnamese typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Outer Ambient Office Background with Depth Blur -->
+    <div class="office-backdrop">
+
+        <!-- Physical Metallic Monitor Enclosure (Bezel & Stand) -->
+        <div class="monitor-wrapper">
+            <div class="monitor-bezel">
+                <!-- Top Bezel Integrated Webcam Dot -->
+                <div class="bezel-webcam-dot" title="Integrated HD Optical Camera"></div>
+
+                <!-- Active Screen Display Area -->
+                <div class="screen-display">
+
+                    <!-- TOP HEADER BAR -->
+                    <header class="kiosk-header">
+                        <div class="header-brand">
+                            <div class="brand-avatar-ring">
+                                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            </div>
+                            <div class="brand-titles">
+                                <h1 class="brand-main">SMART FACIAL ATTENDANCE KIOSK</h1>
+                                <span class="brand-sub">ENTERPRISE CHECK-IN SYSTEM</span>
+                            </div>
+                        </div>
+
+                        <div class="header-clock-center">
+                            <div class="digital-clock" id="digital-clock">10:49:24</div>
+                            <div class="date-stacked">
+                                <span class="day-name" id="day-name">Thứ Tư</span>
+                                <span class="calendar-date" id="calendar-date">07/10/2026</span>
+                            </div>
+                        </div>
+
+                        <div class="header-actions">
+                            <button class="action-btn" id="btn-camera" title="Camera Tablet">
+                                <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                            </button>
+                            <button class="action-btn" id="btn-settings" title="Cài đặt">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                            </button>
+                            <button class="action-btn" id="btn-fullscreen" title="Toàn màn hình">
+                                <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                            </button>
+                        </div>
+                    </header>
+
+                    <!-- THREE-COLUMN MAIN WORKSPACE -->
+                    <main class="kiosk-body-grid">
+
+                        <!-- COLUMN 1: HỆ THỐNG & CAMERA + TRẠNG THÁI KIOSK -->
+                        <section class="kiosk-col col-system-camera">
+                            <div class="panel-card-inner">
+                                <div class="col-header-bar">
+                                    <div class="col-title">
+                                        <svg class="info-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span>Hệ thống & Camera</span>
+                                    </div>
+                                    <div class="status-pill status-ready">
+                                        <span class="pulse-dot"></span>
+                                        <span>Hệ thống Sẵn sàng</span>
+                                    </div>
+                                </div>
+
+                                <!-- Visual 1: Holographic Wireframe Globe Graphic -->
+                                <div class="hologram-globe-wrap">
+                                    <svg class="hologram-globe-svg" viewBox="0 0 200 200">
+                                        <defs>
+                                            <radialGradient id="globeAura" cx="50%" cy="50%" r="50%">
+                                                <stop offset="0%" stop-color="#0284c7" stop-opacity="0.35" />
+                                                <stop offset="60%" stop-color="#0369a1" stop-opacity="0.12" />
+                                                <stop offset="100%" stop-color="#082f49" stop-opacity="0" />
+                                            </radialGradient>
+                                            <linearGradient id="orbitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" stop-color="#38bdf8" />
+                                                <stop offset="100%" stop-color="#0284c7" />
+                                            </linearGradient>
+                                        </defs>
+                                        <!-- Ambient Aura -->
+                                        <circle cx="100" cy="100" r="92" fill="url(#globeAura)" />
+                                        
+                                        <!-- Outer Orbital Rings -->
+                                        <circle class="orbit-ring ring-1" cx="100" cy="100" r="82" stroke="url(#orbitGrad)" stroke-width="1.2" stroke-dasharray="4 6" fill="none" opacity="0.6" />
+                                        <circle class="orbit-ring ring-2" cx="100" cy="100" r="70" stroke="#38bdf8" stroke-width="1" stroke-dasharray="60 30 10 20" fill="none" opacity="0.8" />
+                                        <circle class="orbit-ring ring-3" cx="100" cy="100" r="58" stroke="#0284c7" stroke-width="0.8" stroke-dasharray="2 4" fill="none" opacity="0.5" />
+
+                                        <!-- Spherical Wireframe Sphere -->
+                                        <g class="sphere-wireframe" stroke="#38bdf8" stroke-width="0.85" fill="none" opacity="0.75">
+                                            <!-- Latitude Curves -->
+                                            <ellipse cx="100" cy="100" rx="46" ry="12" />
+                                            <ellipse cx="100" cy="85" rx="42" ry="9" stroke-dasharray="3 3" opacity="0.6" />
+                                            <ellipse cx="100" cy="115" rx="42" ry="9" stroke-dasharray="3 3" opacity="0.6" />
+                                            <ellipse cx="100" cy="73" rx="32" ry="6" opacity="0.5" />
+                                            <ellipse cx="100" cy="127" rx="32" ry="6" opacity="0.5" />
+                                            <!-- Longitude Curves -->
+                                            <ellipse cx="100" cy="100" rx="46" ry="46" stroke-width="1.2" />
+                                            <ellipse cx="100" cy="100" rx="28" ry="46" />
+                                            <ellipse cx="100" cy="100" rx="14" ry="46" />
+                                            <line x1="100" y1="54" x2="100" y2="146" stroke-width="1.2" />
+                                            <line x1="54" y1="100" x2="146" y2="100" stroke-width="1.2" />
+                                        </g>
+                                    </svg>
+                                </div>
+
+                                <!-- Visual 2: Live Camera Feed Box with Detection Bracket -->
+                                <div class="camera-feed-box" id="camera-feed-box">
+                                    <!-- Fallback / Current Scan Image -->
+                                    <img class="camera-stream-img" id="camera-stream-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360' fill='%230b1322'><rect width='640' height='360'/><circle cx='320' cy='150' r='60' fill='%231e293b'/><circle cx='320' cy='140' r='38' fill='%23334155'/><path d='M230 290 C230 230, 410 230, 410 290 Z' fill='%231e293b'/></svg>" alt="Camera Feed">
+                                    <video class="camera-video-stream" id="camera-video-stream" autoplay playsinline muted style="display: none;"></video>
+
+                                    <!-- Emerald Green Face Detection Overlays -->
+                                    <div class="face-detection-overlay">
+                                        <div class="detection-bracket db-tl"></div>
+                                        <div class="detection-bracket db-tr"></div>
+                                        <div class="detection-bracket db-bl"></div>
+                                        <div class="detection-bracket db-br"></div>
+                                        <!-- Horizontal Laser Alignment Line Across Eyes -->
+                                        <div class="detection-alignment-laser"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Footer Section: Trạng Thái Kiosk -->
+                                <div class="kiosk-status-section">
+                                    <h3 class="status-section-heading">Trạng Thái Kiosk</h3>
+                                    <div class="status-cards-grid">
+                                        <div class="kiosk-stat-card">
+                                            <div class="stat-icon-wrap icon-green">
+                                                <svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                                            </div>
+                                            <span class="stat-card-label">Camera Trực Tuyến</span>
+                                        </div>
+
+                                        <div class="kiosk-stat-card">
+                                            <div class="stat-icon-wrap icon-green">
+                                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8l-4.2 4.2"/><circle cx="12" cy="12" r="2"/></svg>
+                                            </div>
+                                            <span class="stat-card-label">Tốc độ quét</span>
+                                        </div>
+
+                                        <div class="kiosk-stat-card">
+                                            <div class="stat-icon-wrap icon-green">
+                                                <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                            </div>
+                                            <span class="stat-card-label">Phản hồi tự động</span>
+                                        </div>
+
+                                        <div class="kiosk-stat-card">
+                                            <div class="stat-icon-wrap icon-blue">
+                                                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                            </div>
+                                            <span class="stat-card-label">Bảo mật</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+
+                        <!-- COLUMN 2: THÔNG TIN CÁ NHÂN & CHẤM CÔNG HÔM NAY -->
+                        <section class="kiosk-col col-personal-info">
+                            <div class="panel-card-inner">
+                                <h2 class="col-title-main">Thông tin Cá nhân</h2>
+
+                                <!-- Profile Snapshot & Name Block -->
+                                <div class="profile-hero-row">
+                                    <div class="profile-photo-container">
+                                        <img class="profile-avatar-img" id="user-avatar" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 180' fill='%23132035'><rect width='160' height='180'/><circle cx='80' cy='70' r='38' fill='%2338bdf8' opacity='0.3'/><path d='M20 160 C20 115 140 115 140 160 Z' fill='%230284c7' opacity='0.4'/></svg>" alt="Chân Dung Nhân Viên">
+                                    </div>
+                                    <div class="profile-name-block">
+                                        <h3 class="user-fullname" id="user-fullname">LÊ THỊ BÍCH PHƯƠNG</h3>
+                                    </div>
+                                </div>
+
+                                <!-- Key-Value Details List -->
+                                <div class="profile-details-list">
+                                    <div class="detail-row">
+                                        <span class="detail-key">Employee ID</span>
+                                        <span class="detail-val" id="user-empid">NV9835</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="detail-key">Employee*ID</span>
+                                        <span class="detail-val" id="user-subcode">NV9835</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="detail-key">Department</span>
+                                        <span class="detail-val" id="user-dept">BAN HẠ TẦNG</span>
+                                    </div>
+                                </div>
+
+                                <!-- Divider -->
+                                <div class="profile-divider"></div>
+
+                                <!-- Attendance Today Section -->
+                                <div class="attendance-today-section">
+                                    <h4 class="today-section-heading">Thông tin chấm công hôm nay</h4>
+                                    <div class="today-checkin-row">
+                                        <div class="checkin-time-label">
+                                            <span>Thông tin check-in:</span>
+                                            <strong class="checkin-time-val" id="user-checkin-time">08:00:01</strong>
+                                        </div>
+                                        <div class="checkin-status-badge">
+                                            <span>Đã Check-in</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+
+                        <!-- COLUMN 3: LỊCH SỬ ĐIỂM DANH TỨC THỜI -->
+                        <section class="kiosk-col col-realtime-history">
+                            <div class="panel-card-inner">
+                                <div class="history-top-bar">
+                                    <div class="col-title">
+                                        <svg class="info-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span>Lịch Sử Điểm Danh Tức Thời</span>
+                                    </div>
+                                    <button class="more-options-btn" title="Tuỳ chọn">
+                                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg>
+                                    </button>
+                                </div>
+
+                                <!-- Counter Sub-Bar -->
+                                <div class="history-counter-bar">
+                                    <div class="counter-left">
+                                        <span>Đã check-in:</span>
+                                        <strong class="counter-val" id="counter-total">125</strong>
+                                    </div>
+                                    <span class="counter-label-right">Tổng nhân sự</span>
+                                </div>
+
+                                <!-- Scrollable Attendance Cards List (Matching image_4.png) -->
+                                <div class="history-scroll-feed" id="history-scroll-feed">
+                                    <!-- 1. Nguyễn Thị Lanh Phương -->
+                                    <div class="history-card-item">
+                                        <div class="user-avatar-circle">
+                                            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        </div>
+                                        <div class="user-meta">
+                                            <h5 class="user-title">NGUYỄN THỊ LANH PHƯƠNG</h5>
+                                            <span class="user-sub">NV9835 BAN HẠ TẦNG</span>
+                                        </div>
+                                        <span class="status-pill-badge pill-in">In</span>
+                                    </div>
+
+                                    <!-- 2. Lê Quốc Huy -->
+                                    <div class="history-card-item">
+                                        <div class="user-avatar-circle">
+                                            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        </div>
+                                        <div class="user-meta">
+                                            <h5 class="user-title">LÊ QUỐC HUY</h5>
+                                            <span class="user-sub">NV9835 BAN HẠ TẦNG</span>
+                                        </div>
+                                        <span class="status-pill-badge pill-in">In</span>
+                                    </div>
+
+                                    <!-- 3. Nguyễn Thanh Phương -->
+                                    <div class="history-card-item">
+                                        <div class="user-avatar-circle">
+                                            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        </div>
+                                        <div class="user-meta">
+                                            <h5 class="user-title">NGUYỄN THANH PHƯƠNG</h5>
+                                            <span class="user-sub">NV8655 BAN HẠ TẦNG</span>
+                                        </div>
+                                        <span class="status-pill-badge pill-in">In</span>
+                                    </div>
+
+                                    <!-- 4. Lê Quốc Thịnh -->
+                                    <div class="history-card-item">
+                                        <div class="user-avatar-circle">
+                                            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        </div>
+                                        <div class="user-meta">
+                                            <h5 class="user-title">LÊ QUỐC THỊNH</h5>
+                                            <span class="user-sub">NV9686 BAN HẠ TẦNG</span>
+                                        </div>
+                                        <span class="status-pill-badge pill-in">In</span>
+                                    </div>
+
+                                    <!-- 5. Lê Quốc Huy -->
+                                    <div class="history-card-item">
+                                        <div class="user-avatar-circle">
+                                            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        </div>
+                                        <div class="user-meta">
+                                            <h5 class="user-title">LÊ QUỐC HUY</h5>
+                                            <span class="user-sub">NV8685 BAN HẠ TẦNG</span>
+                                        </div>
+                                        <span class="status-pill-badge pill-in">In</span>
+                                    </div>
+
+                                    <!-- 6. Nguyễn Thanh Phương (Out) -->
+                                    <div class="history-card-item">
+                                        <div class="user-avatar-circle">
+                                            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        </div>
+                                        <div class="user-meta">
+                                            <h5 class="user-title">NGUYỄN THANH PHƯƠNG</h5>
+                                            <span class="user-sub">NV8895 BAN HẠ TẦNG</span>
+                                        </div>
+                                        <span class="status-pill-badge pill-out">Out</span>
+                                    </div>
+
+                                    <!-- 7. Nguyễn Thanh Phương (Out) -->
+                                    <div class="history-card-item">
+                                        <div class="user-avatar-circle">
+                                            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        </div>
+                                        <div class="user-meta">
+                                            <h5 class="user-title">NGUYỄN THANH PHƯƠNG</h5>
+                                            <span class="user-sub">NV8995 BAN HẠ TẦNG</span>
+                                        </div>
+                                        <span class="status-pill-badge pill-out">Out</span>
+                                    </div>
+
+                                    <!-- 8. Nguyễn Thanh Phương (Timestamp) -->
+                                    <div class="history-card-item">
+                                        <div class="user-avatar-circle">
+                                            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        </div>
+                                        <div class="user-meta">
+                                            <h5 class="user-title">NGUYỄN THANH PHƯƠNG</h5>
+                                            <span class="user-sub">NV8835 BAN HẠ TẦNG</span>
+                                        </div>
+                                        <span class="status-time-stamp">08:00:01</span>
+                                    </div>
+
+                                    <!-- 9. Nguyễn Thị Thị Phương -->
+                                    <div class="history-card-item">
+                                        <div class="user-avatar-circle">
+                                            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        </div>
+                                        <div class="user-meta">
+                                            <h5 class="user-title">NGUYỄN THỊ THỊ PHƯƠNG</h5>
+                                            <span class="user-sub">NV9855 BAN HẠ TẦNG</span>
+                                        </div>
+                                        <span class="status-pill-badge pill-in">In</span>
+                                    </div>
+
+                                    <!-- 10. Lê Thị Bích Phương -->
+                                    <div class="history-card-item">
+                                        <div class="user-avatar-circle">
+                                            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        </div>
+                                        <div class="user-meta">
+                                            <h5 class="user-title">LÊ THỊ BÍCH PHƯƠNG</h5>
+                                            <span class="user-sub">NV9635 BAN HẠ TẦNG</span>
+                                        </div>
+                                        <span class="status-time-stamp">00:00:01</span>
+                                    </div>
+
+                                    <!-- 11. Nguyễn Thị Lanh Phương -->
+                                    <div class="history-card-item">
+                                        <div class="user-avatar-circle">
+                                            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        </div>
+                                        <div class="user-meta">
+                                            <h5 class="user-title">NGUYỄN THỊ LANH PHƯƠNG</h5>
+                                            <span class="user-sub">NV9835 BAN HẠ TẦNG</span>
+                                        </div>
+                                        <span class="status-pill-badge pill-in">In</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+
+                    </main>
+
+                </div>
+            </div>
+
+            <!-- Monitor Stand Base Attached to Monitor Bezel -->
+            <div class="monitor-neck"></div>
+            <div class="monitor-base-foot"></div>
+        </div>
+
+    </div>
+
+    <!-- Hidden Canvas for capture -->
+    <canvas id="webcam-canvas" width="640" height="480" style="display: none;"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>

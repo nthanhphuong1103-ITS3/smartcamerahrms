@@ -1,0 +1,42 @@
+# ==============================================================================
+# GITIGNORE - DỰ ÁN SMART CAMERA HRMS
+# ==============================================================================
+
+# 1. Tệp tin dung lượng lớn (GitHub chặn đẩy tệp > 100MB)
+videos/
+*.zip
+*.tar.gz
+*.7z
+*.pptx
+luxand/
+node_modules/
+
+# 2. Dữ liệu chụp ảnh chấm công thực tế hàng ngày (hàng nghìn ảnh)
+attendance_snapshots/
+captures/
+video_test_results/
+hrms_downloaded_snapshots/
+
+# 3. Ảnh debug và kiểm thử tạm thời
+debug_*.jpg
+test_*.jpg
+sync_test_*.jpg
+kiosk_image4_verified*.png
+NV*.jpg
+
+# 4. Bảo mật: Khóa bản quyền & thông tin nhạy cảm
+*License*.txt
+*.key
+*.pem
+
+# 5. File tạm Python & IDE
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.bak
+.vs/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
