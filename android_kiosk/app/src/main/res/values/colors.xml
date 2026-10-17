@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Kiosk Dark Theme Palette -->
+    <color name="kiosk_bg">#090D16</color>
+    <color name="kiosk_surface">#111827</color>
+    <color name="kiosk_surface_light">#1E293B</color>
+    <color name="kiosk_border">#1E293B</color>
+    <color name="kiosk_border_active">#38BDF8</color>
+
+    <!-- Accent Neon Colors -->
+    <color name="neon_cyan">#00E5FF</color>
+    <color name="neon_green">#10B981</color>
+    <color name="neon_red">#EF4444</color>
+    <color name="neon_amber">#F59E0B</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#F8FAFC</color>
+    <color name="text_secondary">#94A3B8</color>
+    <color name="text_muted">#64748B</color>
+
+    <!-- Shift Badges -->
+    <color name="shift_auto">#3B82F6</color>
+    <color name="shift_in">#10B981</color>
+    <color name="shift_out">#F97316</color>
+</resources>

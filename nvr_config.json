@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "brand": "dahua",
+  "ip": "192.168.100.200",
+  "port": 554,
+  "http_port": 80,
+  "username": "admin",
+  "password": "Gpg@2026@",
+  "channels": {
+    "1": 19,
+    "2": 77,
+    "3": 86,
+    "4": 37
+  },
+  "channel_names": {
+    "19": "CAM 01 - PHÒNG GPL (Tang 4 P. GPL)",
+    "77": "CAM 02 - NHÀ ĂN 1 (IPC)",
+    "86": "CAM 03 - LỐI ĐI CẦU THANG NHÀ ĂN (IPC)",
+    "37": "CAM 04 - NHÀ ĂN 2 (Nha an)"
+  }
+}

@@ -40,3 +40,7 @@ __pycache__/
 .idea/
 .DS_Store
 Thumbs.db
+
+# 6. Build APK & Video clips
+*.apk
+playback_clips/

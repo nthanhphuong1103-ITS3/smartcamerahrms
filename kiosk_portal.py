@@ -42,7 +42,14 @@ _RAW_HTML_KIOSK_TEMPLATE = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SMART FACIAL ATTENDANCE KIOSK - HỆ THỐNG CHẤM CÔNG</title>
+    <title>SMART CAMERA HRMS - HỆ THỐNG CHẤM CÔNG</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/img/apple-touch-icon.png">
     
     <!-- Phông chữ chuẩn tiếng Việt cục bộ (Offline & Intranet 100% an toàn) -->
     <link rel="stylesheet" href="/static/fonts/fonts_local.css">
@@ -221,25 +228,25 @@ _RAW_HTML_KIOSK_TEMPLATE = """<!DOCTYPE html>
         }
 
         .brand-avatar-ring {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            background: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1.5px solid rgba(56, 189, 248, 0.6);
-            box-shadow: 0 0 12px rgba(2, 132, 199, 0.4);
+            border: 2px solid #38bdf8;
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
+            overflow: hidden;
+            padding: 3px;
+            box-sizing: border-box;
         }
 
-        .brand-avatar-ring svg {
-            width: 18px;
-            height: 18px;
-            fill: none;
-            stroke: #ffffff;
-            stroke-width: 2.2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+        .brand-logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
         }
 
         .brand-titles {
@@ -1303,13 +1310,13 @@ _RAW_HTML_KIOSK_TEMPLATE = """<!DOCTYPE html>
             }
         }
 
-        @media (max-width: 850px) {
+        @media (orientation: portrait), (max-width: 850px) {
             .office-backdrop { padding: 0; }
             .monitor-bezel { border-radius: 0; padding: 0; }
             .monitor-neck, .monitor-base-foot, .bezel-webcam-dot { display: none; }
             .kiosk-body-grid { grid-template-columns: 1fr; overflow-y: auto; gap: 10px; }
             .kiosk-col { height: auto; }
-            .camera-square-wrap { max-height: 260px; }
+            .camera-square-wrap { max-height: 48vh; min-height: 280px; }
         }
 
         /* Animation hiển thị thông báo */
@@ -1737,10 +1744,10 @@ _RAW_HTML_KIOSK_TEMPLATE = """<!DOCTYPE html>
                     <header class="kiosk-header">
                         <div class="header-brand">
                             <div class="brand-avatar-ring">
-                                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                <img src="/static/img/logo.png" alt="Smart Camera HRMS" class="brand-logo-img">
                             </div>
                             <div class="brand-titles">
-                                <h1 class="brand-main">SMART FACIAL ATTENDANCE KIOSK</h1>
+                                <h1 class="brand-main">SMART CAMERA HRMS</h1>
                                 <span class="brand-sub">HỆ THỐNG CHẤM CÔNG NHẬN DIỆN KHUÔN MẶT</span>
                             </div>
                         </div>
@@ -1798,19 +1805,19 @@ _RAW_HTML_KIOSK_TEMPLATE = """<!DOCTYPE html>
                                 <div class="info-field-list">
                                     <div class="info-field-row">
                                         <span class="field-label">Mã số nhân viên</span>
-                                        <div class="field-value empty-placeholder" id="user-empid">Chưa có dữ liệu</div>
+                                        <div class="field-value empty-placeholder" id="user-empid">---</div>
                                     </div>
                                     <div class="info-field-row">
                                         <span class="field-label">Vị trí / Chức danh</span>
-                                        <div class="field-value empty-placeholder" id="user-position">Chưa có dữ liệu</div>
+                                        <div class="field-value empty-placeholder" id="user-position">---</div>
                                     </div>
                                     <div class="info-field-row">
                                         <span class="field-label">Vị trí làm việc</span>
-                                        <div class="field-value empty-placeholder" id="user-workplace">Chưa có dữ liệu</div>
+                                        <div class="field-value empty-placeholder" id="user-workplace">---</div>
                                     </div>
                                     <div class="info-field-row">
                                         <span class="field-label">Phòng ban</span>
-                                        <div class="field-value empty-placeholder" id="user-dept">Chưa có dữ liệu</div>
+                                        <div class="field-value empty-placeholder" id="user-dept">---</div>
                                     </div>
                                 </div>
 
@@ -2554,11 +2561,7 @@ _RAW_HTML_KIOSK_TEMPLATE = """<!DOCTYPE html>
                         const cEvtId = Number((cEvt && cEvt.event_id) || 0);
                         lastHandledEventId = Math.max(lastHandledEventId || 0, sEventId, cEvtId);
 
-                        if (data.logs && data.logs.length > 0) {
-                            const counterEl = document.getElementById('counter-total');
-                            if (counterEl) counterEl.textContent = data.logs.length;
-                            renderLiveHistory(data.logs);
-                        }
+                        // Không nạp lịch sử công khai của người khác vào giao diện Kiosk
                     }
                 } catch (e) {}
 
@@ -2956,28 +2959,28 @@ _RAW_HTML_KIOSK_TEMPLATE = """<!DOCTYPE html>
             // Mã số nhân viên
             const empEl = document.getElementById('user-empid');
             if (empEl) {
-                empEl.textContent = 'Chưa có dữ liệu';
+                empEl.textContent = '---';
                 empEl.classList.add('empty-placeholder');
             }
 
             // Vị trí / Chức danh
             const posEl = document.getElementById('user-position');
             if (posEl) {
-                posEl.textContent = 'Chưa có dữ liệu';
+                posEl.textContent = '---';
                 posEl.classList.add('empty-placeholder');
             }
 
             // Vị trí làm việc
             const wpEl = document.getElementById('user-workplace');
             if (wpEl) {
-                wpEl.textContent = 'Chưa có dữ liệu';
+                wpEl.textContent = '---';
                 wpEl.classList.add('empty-placeholder');
             }
 
             // Phòng ban
             const deptEl = document.getElementById('user-dept');
             if (deptEl) {
-                deptEl.textContent = 'Chưa có dữ liệu';
+                deptEl.textContent = '---';
                 deptEl.classList.add('empty-placeholder');
             }
 
@@ -3418,6 +3421,7 @@ _RAW_HTML_KIOSK_TEMPLATE = """<!DOCTYPE html>
                 avatarImg.classList.remove('has-photo');
                 avatarImg.src = '';
             }
+            // Thẻ thông tin và lịch sử cá nhân vẫn lưu lại trong 10 giây (hoặc tới khi người tiếp theo chấm) để người dùng kịp quan sát
         }
 
         function handlePopupBackdropClick(event) {

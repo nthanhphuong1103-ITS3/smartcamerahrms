@@ -28,6 +28,7 @@ from openpyxl.drawing.image import Image as OpenpyxlImage
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from PIL import Image as PILImage
 from flask import Flask, Response, render_template_string, jsonify, send_from_directory, request, send_file, make_response
+import nvr_playback
 
 # Đảm bảo console UTF-8 tiếng Việt không lỗi
 sys.stdout.reconfigure(encoding='utf-8')
@@ -70,35 +71,39 @@ CAMERAS_CONFIG_PATH = os.path.join(BASE_DIR, "cameras_config.json")
 os.makedirs(API_FACES_DIR, exist_ok=True)
 os.makedirs(SNAPSHOTS_DIR, exist_ok=True)
 
-# CẤU HÌNH CAMERA MẶC ĐỊNH
+# CẤU HÌNH CAMERA MẶC ĐỊNH & ÁNH XẠ KÊNH ĐẦU GHI NVR DAHUA
 DEFAULT_CAMERA_SOURCES = [
     {
         "id": 1,
         "name": "CAM 01 - PHÒNG GPL",
         "url": "rtsp://admin:1234Admin@192.168.100.4:554/cam/realmonitor?channel=1&subtype=0",
         "location": "Phòng GPL Lầu 4",
-        "enabled": True
+        "enabled": True,
+        "nvr_channel": 19
     },
     {
         "id": 2,
         "name": "CAM 02 - NHÀ ĂN 1",
         "url": "rtsp://admin:1234admin@192.168.100.154:554/cam/realmonitor?channel=1&subtype=0",
         "location": "Khu vực Nhà Ăn 1",
-        "enabled": True
+        "enabled": True,
+        "nvr_channel": 77
     },
     {
         "id": 3,
         "name": "CAM 03 - LỐI ĐI CẦU THANG NHÀ ĂN",
         "url": "rtsp://admin:1234Admin@192.168.100.127:554/cam/realmonitor?channel=1&subtype=0",
         "location": "Lối đi Cầu thang Nhà ăn",
-        "enabled": True
+        "enabled": True,
+        "nvr_channel": 86
     },
     {
         "id": 4,
         "name": "CAM 04 - NHÀ ĂN 2",
         "url": "rtsp://admin:1234Admin@192.168.100.5:554/cam/realmonitor?channel=1&subtype=0",
         "location": "Khu vực Nhà Ăn 2 (Lầu Lửng)",
-        "enabled": False
+        "enabled": False,
+        "nvr_channel": 37
     }
 ]
 
@@ -124,12 +129,20 @@ def load_cameras_config():
             if cid == 2 or "192.168.100.154" in curl:
                 c["name"] = "CAM 02 - NHÀ ĂN 1"
                 c["location"] = "Khu vực Nhà Ăn 1"
+                c["nvr_channel"] = 77
             elif cid == 3 or "192.168.100.127" in curl or "THANG" in cname.upper():
                 c["name"] = "CAM 03 - LỐI ĐI CẦU THANG NHÀ ĂN"
                 c["location"] = "Lối đi Cầu thang Nhà ăn"
+                c["nvr_channel"] = 86
             elif cid == 4 or "192.168.100.5" in curl or "IT SOFT" in cname.upper() or "LỬNG" in cname.upper():
                 c["name"] = "CAM 04 - NHÀ ĂN 2"
                 c["location"] = "Khu vực Nhà Ăn 2 (Lầu Lửng)"
+                c["nvr_channel"] = 37
+            elif cid == 1 or "192.168.100.4" in curl:
+                c["nvr_channel"] = 19
+
+            if "nvr_channel" not in c:
+                c["nvr_channel"] = nvr_playback.get_nvr_channel_for_cam(cid, cname, curl)
 
         has_cam4 = any("192.168.100.5" in str(c.get("url", "")) or c.get("id") == 4 for c in cams)
         if not has_cam4:
@@ -138,11 +151,13 @@ def load_cameras_config():
                 "name": "CAM 04 - NHÀ ĂN 2",
                 "url": "rtsp://admin:1234Admin@192.168.100.5:554/cam/realmonitor?channel=1&subtype=0",
                 "location": "Khu vực Nhà Ăn 2 (Lầu Lửng)",
-                "enabled": False
+                "enabled": False,
+                "nvr_channel": 37
             })
 
     save_cameras_config(cams)
     return cams
+
 
 def save_cameras_config(cams):
     try:
@@ -1473,7 +1488,13 @@ HTML_ENTERPRISE_PORTAL = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart HRMS • Hệ Thống Điểm Danh Khuôn Mặt</title>
+    <title>Smart Camera HRMS • Hệ Thống Điểm Danh Khuôn Mặt</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/img/apple-touch-icon.png">
     <!-- Phông chữ chuẩn tiếng Việt cục bộ (Offline & Intranet 100% an toàn) -->
     <link rel="stylesheet" href="/static/fonts/fonts_local.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1520,8 +1541,9 @@ HTML_ENTERPRISE_PORTAL = """
         .header-left { display: flex; align-items: center; gap: 32px; }
         .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
         .brand-icon {
-            width: 32px; height: 32px; border-radius: 6px; background: #0f172a;
-            color: #fff; display: flex; align-items: center; justify-content: center;
+            width: 34px; height: 34px; border-radius: 50%; background: #ffffff;
+            border: 1.5px solid #38bdf8; display: flex; align-items: center; justify-content: center;
+            overflow: hidden; box-shadow: 0 0 10px rgba(56, 189, 248, 0.25); padding: 2px; box-sizing: border-box;
         }
         .brand-text-group { display: flex; align-items: center; gap: 8px; }
         .brand-name { font-size: 15px; font-weight: 700; color: #0f172a; letter-spacing: -0.3px; }
@@ -2022,13 +2044,10 @@ HTML_ENTERPRISE_PORTAL = """
         <div class="header-left">
             <a href="#" class="brand">
                 <div class="brand-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                        <circle cx="12" cy="13" r="4"/>
-                    </svg>
+                    <img src="/static/img/logo.png" alt="Smart Camera HRMS" style="width: 26px; height: 26px; object-fit: contain;">
                 </div>
                 <div class="brand-text-group">
-                    <span class="brand-name">Smart HRMS</span>
+                    <span class="brand-name">Smart Camera HRMS</span>
                     <span class="brand-divider">/</span>
                     <span class="brand-subtitle">Hệ thống điểm danh khuôn mặt</span>
                 </div>
@@ -2047,6 +2066,10 @@ HTML_ENTERPRISE_PORTAL = """
                 <button class="nav-tab-btn" id="tab-data" onclick="switchNavTab('data')">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                     <span>Dữ liệu & Báo cáo</span>
+                </button>
+                <button class="nav-tab-btn" id="tab-playback" onclick="switchNavTab('playback')">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    <span>Xem lại NVR</span>
                 </button>
                 <a href="/kiosk" target="_blank" class="nav-tab-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; color:#0284c7; border: 1px solid rgba(2, 132, 199, 0.35); background: rgba(2, 132, 199, 0.08); border-radius: 8px;">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
@@ -2519,6 +2542,10 @@ HTML_ENTERPRISE_PORTAL = """
                                 <option value="576p">576p</option>
                             </select>
                         </div>
+                        <button class="btn btn-outline" onclick="switchNavTab('playback')" style="padding:5px 12px;font-size:12px;display:inline-flex;align-items:center;gap:6px;color:#0284c7;border-color:#bae6fd;background:#f0f9ff;" title="Xem lại video ghi hình từ ổ cứng Đầu ghi NVR">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                            <span>Xem lại NVR</span>
+                        </button>
                         <button class="btn" onclick="openAddCameraModal()" style="padding:5px 12px;font-size:12px;display:inline-flex;align-items:center;gap:6px;">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                             <span>Thêm camera</span>
@@ -2684,10 +2711,11 @@ HTML_ENTERPRISE_PORTAL = """
                                     <th style="width:150px;">VỊ TRÍ CAMERA</th>
                                     <th style="width:80px;text-align:center;">ĐỘ TIN CẬY</th>
                                     <th style="width:90px;text-align:center;">TRẠNG THÁI</th>
+                                    <th style="width:100px;text-align:center;">VIDEO NVR</th>
                                 </tr>
                             </thead>
                             <tbody id="export-report-tbody">
-                                <tr><td colspan="11" style="text-align:center;padding:24px;color:#94a3b8;">Đang tải dữ liệu...</td></tr>
+                                <tr><td colspan="12" style="text-align:center;padding:24px;color:#94a3b8;">Đang tải dữ liệu...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -2723,6 +2751,123 @@ HTML_ENTERPRISE_PORTAL = """
                                 <tr><td colspan="8" style="text-align:center;padding:24px;color:#94a3b8;">Đang nạp danh sách nhân viên...</td></tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: XEM LẠI NVR (PLAYBACK VIEW) -->
+        <div id="view-playback" class="app-view">
+            <!-- NVR Info Banner -->
+            <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;box-shadow:var(--shadow-sm);">
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <div style="width:38px;height:38px;border-radius:8px;background:#f0f9ff;border:1px solid #bae6fd;display:flex;align-items:center;justify-content:center;color:#0284c7;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                    </div>
+                    <div>
+                        <div style="font-weight:700;font-size:14px;color:#0f172a;display:flex;align-items:center;gap:8px;">
+                            <span>Đầu Ghi NVR Dahua (Xem Lại Video Ghi Hình Ổ Cứng)</span>
+                            <span id="nvr-status-badge" class="badge-online">NVR 192.168.100.200 : 554 Sẵn sàng</span>
+                        </div>
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">
+                            Luồng Playback trích xuất trực tiếp từ ổ cứng NVR • Hoạt động độc lập, không ảnh hưởng đến AI nhận diện khuôn mặt
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <button class="btn btn-outline" onclick="checkNVRStatus()" style="font-size:12px;padding:5px 12px;">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                        <span>Kiểm tra NVR</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Playback Controls & Video Player Grid -->
+            <div style="display:grid;grid-template-columns:360px 1fr;gap:14px;align-items:start;">
+                <!-- LEFT: Control Panel -->
+                <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:18px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:14px;">
+                    <div style="font-weight:700;font-size:13px;color:#0f172a;border-bottom:1px solid var(--border);padding-bottom:10px;display:flex;align-items:center;gap:8px;">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        <span>Thiết lập phát lại</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Chọn Camera / Vị trí:</label>
+                        <select id="pb-cam-select" class="form-input" style="font-weight:600;">
+                            <option value="2" selected>CAM 02 - NHÀ ĂN 1 (Kênh NVR 77)</option>
+                            <option value="3">CAM 03 - LỐI ĐI CẦU THANG (Kênh NVR 86)</option>
+                            <option value="4">CAM 04 - NHÀ ĂN 2 (Kênh NVR 37)</option>
+                            <option value="1">CAM 01 - PHÒNG GPL (Kênh NVR 19)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Từ thời điểm:</label>
+                        <input type="datetime-local" id="pb-time-start" class="form-input" step="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Đến thời điểm:</label>
+                        <input type="datetime-local" id="pb-time-end" class="form-input" step="1">
+                    </div>
+
+                    <div style="display:flex;flex-direction:column;gap:6px;">
+                        <label class="form-label" style="margin-bottom:0;">Mốc thời gian nhanh:</label>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                            <button class="btn btn-outline" onclick="setPlaybackPreset('15m')" style="padding:4px 6px;font-size:11px;">15 phút trước</button>
+                            <button class="btn btn-outline" onclick="setPlaybackPreset('1h')" style="padding:4px 6px;font-size:11px;">1 giờ trước</button>
+                            <button class="btn btn-outline" onclick="setPlaybackPreset('morning')" style="padding:4px 6px;font-size:11px;">Ca sáng (07:30)</button>
+                            <button class="btn btn-outline" onclick="setPlaybackPreset('lunch')" style="padding:4px 6px;font-size:11px;">Ăn trưa (11:30)</button>
+                        </div>
+                    </div>
+
+                    <div style="display:flex;gap:8px;margin-top:6px;">
+                        <button class="btn btn-primary" onclick="startPlaybackFromPanel()" style="flex:1;justify-content:center;padding:9px 14px;background:#0284c7;border-color:#0284c7;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            <span>Phát Lại Video</span>
+                        </button>
+                        <button class="btn btn-outline" onclick="stopPlaybackStream(false)" style="padding:9px 14px;color:#dc2626;" title="Dừng luồng">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                        </button>
+                    </div>
+
+                    <div style="border-top:1px solid var(--border);padding-top:12px;margin-top:4px;">
+                        <button id="btn-export-clip-panel" class="btn btn-outline" onclick="exportClipFromPanel()" style="width:100%;justify-content:center;padding:8px 12px;font-weight:600;color:#059669;border-color:#a7f3d0;background:#ecfdf5;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            <span>Tải Đoạn Clip MP4 Về Máy</span>
+                        </button>
+                        <div id="export-clip-status" style="font-size:11px;color:var(--text-muted);margin-top:6px;text-align:center;"></div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Video Player Container -->
+                <div style="background:#0f172a;border:1px solid #1e293b;border-radius:8px;overflow:hidden;box-shadow:var(--shadow-md);display:flex;flex-direction:column;">
+                    <div style="background:#1e293b;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;color:#fff;">
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <span style="font-size:13px;font-weight:700;" id="pb-player-title">MÀN HÌNH XEM LẠI PLAYBACK NVR</span>
+                            <span id="pb-player-badge" style="display:none;background:#ef4444;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:4px;letter-spacing:0.5px;">● PLAYBACK REC</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:6px;">
+                            <button class="btn btn-outline" onclick="adjustPlaybackTime(-60)" style="padding:3px 8px;font-size:11px;background:#334155;color:#fff;border-color:#475569;" title="Lùi lại 1 phút">-1m</button>
+                            <button class="btn btn-outline" onclick="adjustPlaybackTime(-30)" style="padding:3px 8px;font-size:11px;background:#334155;color:#fff;border-color:#475569;" title="Lùi lại 30 giây">-30s</button>
+                            <button class="btn btn-outline" onclick="adjustPlaybackTime(30)" style="padding:3px 8px;font-size:11px;background:#334155;color:#fff;border-color:#475569;" title="Tiến lên 30 giây">+30s</button>
+                            <button class="btn btn-outline" onclick="adjustPlaybackTime(60)" style="padding:3px 8px;font-size:11px;background:#334155;color:#fff;border-color:#475569;" title="Tiến lên 1 phút">+1m</button>
+                        </div>
+                    </div>
+
+                    <!-- Video Frame -->
+                    <div style="position:relative;background:#000;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                        <img id="playback-video-stream" src="" alt="NVR Playback Feed" style="width:100%;height:100%;object-fit:contain;display:none;">
+                        <div id="playback-placeholder-box" style="text-align:center;padding:40px;color:#94a3b8;">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 12px;display:block;opacity:0.6;"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                            <div style="font-size:14px;font-weight:600;color:#cbd5e1;">Chưa kích hoạt luồng phát lại</div>
+                            <div style="font-size:12px;color:#64748b;margin-top:4px;">Chọn Camera và khung giờ bên trái, sau đó nhấn "Phát Lại Video"</div>
+                        </div>
+                    </div>
+
+                    <div style="background:#0f172a;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;color:#94a3b8;font-size:11px;border-top:1px solid #1e293b;">
+                        <span id="pb-stream-info">Độ phân giải NVR: 2560x1440 (Tự động nén Web 1280x720) • 20 FPS</span>
+                        <span>Giao thức: RTSP TCP • Cổng 554</span>
                     </div>
                 </div>
             </div>
@@ -2876,6 +3021,50 @@ HTML_ENTERPRISE_PORTAL = """
         </div>
     </div>
 
+    <!-- MODAL XEM LẠI NVR THEO SỰ KIỆN (EVENT PLAYBACK POPUP) -->
+    <div id="playback-modal" class="modal-overlay" style="display:none;z-index:9998;">
+        <div class="modal-box" style="max-width:960px;width:95%;">
+            <div class="modal-header">
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:26px;height:26px;border-radius:6px;background:#f0f9ff;color:#0284c7;display:flex;align-items:center;justify-content:center;">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    </div>
+                    <span id="modal-pb-title" style="font-weight:700;">Xem Lại Video Sự Kiện Điểm Danh (NVR)</span>
+                </div>
+                <button class="modal-close-btn" onclick="closePlaybackModal()" title="Đóng">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="modal-body" style="padding:14px;display:flex;flex-direction:column;gap:12px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;background:#f8fafc;padding:8px 14px;border-radius:6px;border:1px solid var(--border);">
+                    <div style="font-size:12px;color:#0f172a;">
+                        <span style="font-weight:700;" id="modal-pb-person">--</span> •
+                        <span style="color:#0284c7;font-weight:600;" id="modal-pb-cam">--</span> •
+                        <span style="color:var(--text-muted);" id="modal-pb-time">--</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:6px;">
+                        <button class="btn btn-outline" onclick="adjustModalPlaybackTime(-30)" style="padding:4px 8px;font-size:11px;" title="Lùi lại 30 giây">-30s</button>
+                        <button class="btn btn-outline" onclick="adjustModalPlaybackTime(30)" style="padding:4px 8px;font-size:11px;" title="Tiến lên 30 giây">+30s</button>
+                        <button id="modal-pb-export-btn" class="btn" onclick="exportModalClip()" style="padding:4px 12px;font-size:11px;background:#059669;border-color:#059669;display:inline-flex;align-items:center;gap:5px;">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            <span>Tải Đoạn Clip MP4</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div style="background:#000;border-radius:6px;overflow:hidden;aspect-ratio:16/9;position:relative;display:flex;align-items:center;justify-content:center;">
+                    <img id="modal-playback-video-stream" src="" alt="Playback Event Feed" style="width:100%;height:100%;object-fit:contain;">
+                </div>
+                <div id="modal-pb-status" style="font-size:11px;color:var(--text-muted);text-align:center;">
+                    Đang truyền phát lại video chất lượng cao từ ổ cứng Đầu ghi NVR Dahua
+                </div>
+            </div>
+            <div class="modal-footer" style="display:flex;justify-content:flex-end;">
+                <button class="btn btn-outline" onclick="closePlaybackModal()">Đóng cửa sổ</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ==================================================================== -->
     <!-- SCRIPT CLIENT LOGIC                                                 -->
     <!-- ==================================================================== -->
@@ -2886,6 +3075,330 @@ HTML_ENTERPRISE_PORTAL = """
         let camerasList = [];
         let allLogs = [];
         let allEmployees = [];
+
+        // ==========================================
+        // BIẾN & HÀM ĐIỀU KHIỂN PLAYBACK ĐẦU GHI NVR
+        // ==========================================
+        let currentModalRecord = null;
+
+        function initPlaybackView() {
+            checkNVRStatus();
+            const now = new Date();
+            const past15m = new Date(now.getTime() - 15 * 60000);
+            
+            const formatForInput = (d) => {
+                const y = d.getFullYear();
+                const m = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                const h = String(d.getHours()).padStart(2, '0');
+                const mi = String(d.getMinutes()).padStart(2, '0');
+                const s = String(d.getSeconds()).padStart(2, '0');
+                return `${y}-${m}-${day}T${h}:${mi}:${s}`;
+            };
+
+            const startInp = document.getElementById('pb-time-start');
+            const endInp = document.getElementById('pb-time-end');
+            if (startInp && !startInp.value) startInp.value = formatForInput(past15m);
+            if (endInp && !endInp.value) endInp.value = formatForInput(now);
+        }
+
+        async function checkNVRStatus() {
+            try {
+                const res = await fetch('/api/nvr/status');
+                const data = await res.json();
+                const badge = document.getElementById('nvr-status-badge');
+                if (badge && data.success && data.nvr) {
+                    if (data.nvr.rtsp_online) {
+                        badge.className = 'badge-online';
+                        badge.innerText = `NVR ${data.nvr.ip} : 554 Sẵn sàng`;
+                    } else {
+                        badge.className = 'badge-offline';
+                        badge.innerText = `NVR ${data.nvr.ip} Mất kết nối`;
+                    }
+                }
+            } catch (e) {
+                console.error("Lỗi kiểm tra NVR:", e);
+            }
+        }
+
+        function setPlaybackPreset(preset) {
+            const now = new Date();
+            const startInp = document.getElementById('pb-time-start');
+            const endInp = document.getElementById('pb-time-end');
+            if (!startInp || !endInp) return;
+
+            const formatForInput = (d) => {
+                const y = d.getFullYear();
+                const m = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                const h = String(d.getHours()).padStart(2, '0');
+                const mi = String(d.getMinutes()).padStart(2, '0');
+                const s = String(d.getSeconds()).padStart(2, '0');
+                return `${y}-${m}-${day}T${h}:${mi}:${s}`;
+            };
+
+            if (preset === '15m') {
+                const past = new Date(now.getTime() - 15 * 60000);
+                startInp.value = formatForInput(past);
+                endInp.value = formatForInput(now);
+            } else if (preset === '1h') {
+                const past = new Date(now.getTime() - 60 * 60000);
+                startInp.value = formatForInput(past);
+                endInp.value = formatForInput(now);
+            } else if (preset === 'morning') {
+                const s = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 7, 30, 0);
+                const e = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 30, 0);
+                startInp.value = formatForInput(s);
+                endInp.value = formatForInput(e);
+            } else if (preset === 'lunch') {
+                const s = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 30, 0);
+                const e = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 30, 0);
+                startInp.value = formatForInput(s);
+                endInp.value = formatForInput(e);
+            }
+        }
+
+        function startPlaybackFromPanel() {
+            const camSelect = document.getElementById('pb-cam-select');
+            const startInp = document.getElementById('pb-time-start');
+            const endInp = document.getElementById('pb-time-end');
+            const streamImg = document.getElementById('playback-video-stream');
+            const placeholder = document.getElementById('playback-placeholder-box');
+            const playerBadge = document.getElementById('pb-player-badge');
+            const playerTitle = document.getElementById('pb-player-title');
+
+            if (!camSelect || !startInp || !endInp || !streamImg) return;
+
+            const camId = camSelect.value;
+            const camText = camSelect.options[camSelect.selectedIndex].text;
+            const startTime = startInp.value.replace('T', ' ');
+            const endTime = endInp.value.replace('T', ' ');
+
+            if (!startTime || !endTime) {
+                alert('Vui lòng chọn đủ thời gian bắt đầu và kết thúc!');
+                return;
+            }
+
+            const streamUrl = `/playback_feed?cam_id=${encodeURIComponent(camId)}&start=${encodeURIComponent(startTime)}&end=${encodeURIComponent(endTime)}&_t=${Date.now()}`;
+            
+            streamImg.src = "";
+            streamImg.style.display = 'block';
+            if (placeholder) placeholder.style.display = 'none';
+            if (playerBadge) playerBadge.style.display = 'inline-block';
+            if (playerTitle) playerTitle.innerText = `ĐANG PHÁT LẠI: ${camText}`;
+
+            setTimeout(() => {
+                streamImg.src = streamUrl;
+            }, 100);
+        }
+
+        function stopPlaybackStream(isModal) {
+            if (isModal) {
+                const mImg = document.getElementById('modal-playback-video-stream');
+                if (mImg) {
+                    mImg.src = "";
+                }
+            } else {
+                const streamImg = document.getElementById('playback-video-stream');
+                const placeholder = document.getElementById('playback-placeholder-box');
+                const playerBadge = document.getElementById('pb-player-badge');
+                const playerTitle = document.getElementById('pb-player-title');
+                if (streamImg) {
+                    streamImg.src = "";
+                    streamImg.style.display = 'none';
+                }
+                if (placeholder) placeholder.style.display = 'block';
+                if (playerBadge) playerBadge.style.display = 'none';
+                if (playerTitle) playerTitle.innerText = 'MÀN HÌNH XEM LẠI PLAYBACK NVR (ĐÃ DỪNG)';
+            }
+        }
+
+        function adjustPlaybackTime(deltaSec) {
+            const startInp = document.getElementById('pb-time-start');
+            const endInp = document.getElementById('pb-time-end');
+            if (!startInp || !endInp || !startInp.value || !endInp.value) return;
+
+            const formatForInput = (d) => {
+                const y = d.getFullYear();
+                const m = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                const h = String(d.getHours()).padStart(2, '0');
+                const mi = String(d.getMinutes()).padStart(2, '0');
+                const s = String(d.getSeconds()).padStart(2, '0');
+                return `${y}-${m}-${day}T${h}:${mi}:${s}`;
+            };
+
+            const sDt = new Date(startInp.value);
+            const eDt = new Date(endInp.value);
+            sDt.setSeconds(sDt.getSeconds() + deltaSec);
+            eDt.setSeconds(eDt.getSeconds() + deltaSec);
+
+            startInp.value = formatForInput(sDt);
+            endInp.value = formatForInput(eDt);
+
+            startPlaybackFromPanel();
+        }
+
+        async function exportClipFromPanel() {
+            const camSelect = document.getElementById('pb-cam-select');
+            const startInp = document.getElementById('pb-time-start');
+            const endInp = document.getElementById('pb-time-end');
+            const statusEl = document.getElementById('export-clip-status');
+            const btn = document.getElementById('btn-export-clip-panel');
+
+            if (!camSelect || !startInp || !endInp) return;
+
+            const camId = camSelect.value;
+            const startTime = startInp.value.replace('T', ' ');
+            const endTime = endInp.value.replace('T', ' ');
+
+            if (statusEl) statusEl.innerHTML = `<span style="color:#0284c7;">⏳ Đang trích xuất video MP4 từ ổ cứng NVR... Vui lòng chờ 3-5 giây</span>`;
+            if (btn) btn.disabled = true;
+
+            try {
+                const res = await fetch('/api/playback/export_clip', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        cam_id: camId,
+                        start_time: startTime,
+                        end_time: endTime
+                    })
+                });
+                const data = await res.json();
+                if (data.success && data.data && data.data.download_url) {
+                    if (statusEl) statusEl.innerHTML = `<span style="color:#059669;font-weight:600;">✓ Trích xuất thành công (${data.data.file_size_mb} MB)! Đang tải về...</span>`;
+                    const a = document.createElement('a');
+                    a.href = data.data.download_url;
+                    a.download = data.data.filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                } else {
+                    if (statusEl) statusEl.innerHTML = `<span style="color:#dc2626;">✕ ${data.error || 'Lỗi trích xuất clip'}</span>`;
+                }
+            } catch (e) {
+                if (statusEl) statusEl.innerHTML = `<span style="color:#dc2626;">✕ Lỗi kết nối: ${e.message}</span>`;
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+        }
+
+        function openPlaybackForRecord(camName, timeStr, empName, empCode) {
+            currentModalRecord = {
+                camName: camName,
+                timeStr: timeStr,
+                empName: empName,
+                empCode: empCode,
+                deltaSec: 0
+            };
+
+            const modal = document.getElementById('playback-modal');
+            const pPerson = document.getElementById('modal-pb-person');
+            const pCam = document.getElementById('modal-pb-cam');
+            const pTime = document.getElementById('modal-pb-time');
+            const pImg = document.getElementById('modal-playback-video-stream');
+            const pStatus = document.getElementById('modal-pb-status');
+
+            if (pPerson) pPerson.innerText = `${empName} [${empCode}]`;
+            if (pCam) pCam.innerText = camName;
+            if (pTime) pTime.innerText = `Sự kiện: ${timeStr} (±30s)`;
+
+            const streamUrl = `/playback_feed?cam_id=${encodeURIComponent(camName)}&time=${encodeURIComponent(timeStr)}&window_sec=30&_t=${Date.now()}`;
+            if (pImg) {
+                pImg.src = "";
+                setTimeout(() => { pImg.src = streamUrl; }, 100);
+            }
+            if (pStatus) pStatus.innerText = `Đang kết nối luồng phát lại NVR thời điểm ${timeStr}...`;
+
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function closePlaybackModal() {
+            const modal = document.getElementById('playback-modal');
+            const pImg = document.getElementById('modal-playback-video-stream');
+            if (pImg) pImg.src = "";
+            if (modal) modal.style.display = 'none';
+            currentModalRecord = null;
+        }
+
+        function adjustModalPlaybackTime(delta) {
+            if (!currentModalRecord) return;
+            currentModalRecord.deltaSec = (currentModalRecord.deltaSec || 0) + delta;
+            
+            let baseDt = new Date(currentModalRecord.timeStr.replace(/-/g, '/'));
+            baseDt.setSeconds(baseDt.getSeconds() + currentModalRecord.deltaSec);
+
+            const formatDt = (d) => {
+                const y = d.getFullYear();
+                const m = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                const h = String(d.getHours()).padStart(2, '0');
+                const mi = String(d.getMinutes()).padStart(2, '0');
+                const s = String(d.getSeconds()).padStart(2, '0');
+                return `${y}-${m}-${day} ${h}:${mi}:${s}`;
+            };
+            const newTimeStr = formatDt(baseDt);
+
+            const pTime = document.getElementById('modal-pb-time');
+            if (pTime) pTime.innerText = `Mốc: ${newTimeStr} (Dịch chuyển ${currentModalRecord.deltaSec > 0 ? '+' : ''}${currentModalRecord.deltaSec}s)`;
+
+            const pImg = document.getElementById('modal-playback-video-stream');
+            const streamUrl = `/playback_feed?cam_id=${encodeURIComponent(currentModalRecord.camName)}&time=${encodeURIComponent(newTimeStr)}&window_sec=30&_t=${Date.now()}`;
+            if (pImg) {
+                pImg.src = "";
+                setTimeout(() => { pImg.src = streamUrl; }, 100);
+            }
+        }
+
+        async function exportModalClip() {
+            if (!currentModalRecord) return;
+            const btn = document.getElementById('modal-pb-export-btn');
+            const statusEl = document.getElementById('modal-pb-status');
+            if (btn) btn.disabled = true;
+            if (statusEl) statusEl.innerHTML = `<span style="color:#0284c7;">⏳ Đang trích xuất đoạn MP4 từ NVR... Vui lòng chờ vài giây</span>`;
+
+            try {
+                let baseDt = new Date(currentModalRecord.timeStr.replace(/-/g, '/'));
+                baseDt.setSeconds(baseDt.getSeconds() + (currentModalRecord.deltaSec || 0));
+                const formatDt = (d) => {
+                    const y = d.getFullYear();
+                    const m = String(d.getMonth() + 1).padStart(2, '0');
+                    const day = String(d.getDate()).padStart(2, '0');
+                    const h = String(d.getHours()).padStart(2, '0');
+                    const mi = String(d.getMinutes()).padStart(2, '0');
+                    const s = String(d.getSeconds()).padStart(2, '0');
+                    return `${y}-${m}-${day} ${h}:${mi}:${s}`;
+                };
+                const tStr = formatDt(baseDt);
+
+                const res = await fetch('/api/playback/export_clip', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        cam_id: currentModalRecord.camName,
+                        time: tStr,
+                        window_sec: 30
+                    })
+                });
+                const data = await res.json();
+                if (data.success && data.data && data.data.download_url) {
+                    if (statusEl) statusEl.innerHTML = `<span style="color:#059669;font-weight:600;">✓ Đã xuất clip thành công (${data.data.file_size_mb} MB)! Đang tải về...</span>`;
+                    const a = document.createElement('a');
+                    a.href = data.data.download_url;
+                    a.download = data.data.filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                } else {
+                    if (statusEl) statusEl.innerHTML = `<span style="color:#dc2626;">✕ ${data.error || 'Lỗi trích xuất clip'}</span>`;
+                }
+            } catch (e) {
+                if (statusEl) statusEl.innerHTML = `<span style="color:#dc2626;">✕ Lỗi: ${e.message}</span>`;
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+        }
 
         // Helper gán text an toàn chống lỗi null
         function setElemText(id, val) {
@@ -3584,6 +4097,12 @@ HTML_ENTERPRISE_PORTAL = """
                                 <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">
                                     Mốc #${data.timeline.length - idx} • Xác thực hợp lệ • Trạng thái: <strong>${item.status || 'Hợp lệ'}</strong>
                                 </div>
+                                <div style="margin-top:6px;">
+                                    <button class="btn btn-outline" onclick="openPlaybackForRecord('${(item.cam || '').replace(/'/g, "\\'")}', '${item.time}', '${(item.name || '').replace(/'/g, "\\'")}', '${item.code}')" style="padding:2px 8px;font-size:10px;font-weight:600;color:#0284c7;border-color:#bae6fd;background:#f0f9ff;display:inline-flex;align-items:center;gap:4px;" title="Xem lại đoạn video từ Đầu ghi NVR">
+                                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                                        <span>Xem lại NVR</span>
+                                    </button>
+                                </div>
                             </div>
                             ${snapUrl ? `
                                 <div class="timeline-snap-box" onclick="openLightbox('${snapUrl}', '${item.name} [${item.code}] lúc ${item.time} (${item.cam}) - Độ tương đồng: ${item.conf}')" title="Nhấp để phóng to ảnh chụp">
@@ -3646,13 +4165,19 @@ HTML_ENTERPRISE_PORTAL = """
 
             if (tabName === 'admin') {
                 stopAllVideoStreams();
+                stopPlaybackStream(false);
                 loadAdminAnalytics();
                 renderAdminCameraTable();
             } else if (tabName === 'data') {
                 stopAllVideoStreams();
+                stopPlaybackStream(false);
                 loadAllAttendanceRecords();
                 loadEmployeesList();
+            } else if (tabName === 'playback') {
+                stopAllVideoStreams();
+                initPlaybackView();
             } else if (tabName === 'camera') {
+                stopPlaybackStream(false);
                 if (currentCamView === 'grid') {
                     renderCameraGrid();
                 } else {
@@ -4220,7 +4745,7 @@ HTML_ENTERPRISE_PORTAL = """
             if (filtered.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="11" style="text-align:center;padding:32px;color:#94a3b8;font-size:13px;">
+                        <td colspan="12" style="text-align:center;padding:32px;color:#94a3b8;font-size:13px;">
                             Không tìm thấy bản ghi điểm danh nào phù hợp với bộ lọc.
                         </td>
                     </tr>
@@ -4262,6 +4787,12 @@ HTML_ENTERPRISE_PORTAL = """
                         </td>
                         <td style="text-align:center;color:var(--success);font-weight:800;font-size:12px;">${item.conf}</td>
                         <td style="text-align:center;color:var(--success);font-weight:700;font-size:11px;">${item.status || 'Đang làm việc'}</td>
+                        <td style="text-align:center;">
+                            <button class="btn btn-outline" onclick="openPlaybackForRecord('${(item.cam || '').replace(/'/g, "\\'")}', '${item.time}', '${safeName}', '${item.code}')" style="padding:2px 7px;font-size:11px;font-weight:600;color:#0284c7;border-color:#bae6fd;background:#f0f9ff;display:inline-flex;align-items:center;gap:4px;" title="Xem lại đoạn video từ Đầu ghi NVR">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                                <span>Xem lại</span>
+                            </button>
+                        </td>
                     </tr>
                 `;
             });
@@ -4485,7 +5016,9 @@ HTML_EXPORT_REPORT = """
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Báo Cáo Điểm Danh Khuôn Mặt - Smart HRMS</title>
+    <title>Báo Cáo Điểm Danh Khuôn Mặt - Smart Camera HRMS</title>
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
     <style>
         * { box-sizing: border-box; }
         html, body, table, th, td, div, span, p, h1, h2, h3, input, select, button {
@@ -4819,6 +5352,11 @@ HTML_EXPORT_REPORT = """
 # =============================================================================
 # 7. CÁC ĐƯỜNG DẪN FLASK ROUTE
 # =============================================================================
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static/img', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+
 @app.route('/')
 def index():
     return render_template_string(HTML_ENTERPRISE_PORTAL)
@@ -4963,18 +5501,20 @@ _kiosk_live_session = {
 def get_today_employee_logs(emp_code):
     """Trích xuất toàn bộ các lượt chấm công trong ngày hôm nay của một nhân viên"""
     today_str = datetime.now().strftime("%Y-%m-%d")
-    results = []
+    target_code = str(emp_code).strip().upper() if emp_code else ""
+    if not target_code or target_code in ("", "UNDEFINED", "NULL", "NONE", "---", "CHƯA CÓ DỮ LIỆU", "NV", "NV: ---"):
+        return []
+
     if os.path.exists(ATTENDANCE_LOG_PATH):
         try:
             with open(ATTENDANCE_LOG_PATH, "r", encoding="utf-8-sig", errors="replace") as f:
                 reader = csv.reader(f)
                 header = next(reader, None)
-                target_code = str(emp_code).strip().upper()
                 for row in reader:
                     if len(row) >= 8:
                         row_time = row[0].strip()
                         row_code = row[1].strip().upper()
-                        if row_time.startswith(today_str) and (row_code == target_code or target_code in row_code):
+                        if row_time.startswith(today_str) and row_code == target_code:
                             t_full = row_time
                             t_short = t_full.split()[1] if len(t_full.split()) > 1 else t_full
                             cam_name = row[9] if len(row) > 9 else (row[7] if len(row) > 7 else "TABLET KIOSK")
@@ -5373,6 +5913,96 @@ def generate_camera_stream(cam_id):
 def video_feed(cam_id):
     return Response(generate_camera_stream(cam_id),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/playback_feed')
+def playback_feed():
+    """
+    Luồng phát lại video từ ổ cứng Đầu ghi NVR Dahua (MJPEG):
+    - Tham số:
+      + cam_id: ID camera (1, 2, 3, 4) hoặc tên/IP hoặc kênh NVR (19, 77, 86, 37)
+      + start: Thời điểm bắt đầu (YYYY-MM-DD HH:MM:SS)
+      + end: Thời điểm kết thúc (YYYY-MM-DD HH:MM:SS)
+      + time: Thời điểm sự kiện (khi click từ bảng điểm danh)
+      + window_sec: Số giây trước và sau sự kiện (mặc định 30s)
+    - Hoàn toàn chạy độc lập, giải phóng ngay khi client ngắt kết nối
+    """
+    cam_id = request.args.get('cam_id', request.args.get('channel', '2')).strip()
+    start_str = request.args.get('start', request.args.get('from_time', '')).strip()
+    end_str = request.args.get('end', request.args.get('to_time', '')).strip()
+    event_time_str = request.args.get('time', '').strip()
+    window_sec = request.args.get('window_sec', type=int) or 30
+
+    if event_time_str and not start_str:
+        ev_dt = nvr_playback.parse_datetime(event_time_str)
+        s_dt = ev_dt - timedelta(seconds=window_sec)
+        e_dt = ev_dt + timedelta(seconds=window_sec)
+    else:
+        now = datetime.now()
+        s_dt = nvr_playback.parse_datetime(start_str) if start_str else (now - timedelta(minutes=5))
+        e_dt = nvr_playback.parse_datetime(end_str) if end_str else now
+
+    return Response(
+        nvr_playback.generate_playback_mjpeg(cam_id, s_dt, e_dt, max_fps=20, target_width=1280),
+        mimetype='multipart/x-mixed-replace; boundary=frame'
+    )
+
+
+@app.route('/api/playback/export_clip', methods=['POST', 'GET'])
+def api_playback_export_clip():
+    """Trích xuất đoạn video ngắn (MP4) từ ổ cứng Đầu ghi NVR Dahua để tải về máy"""
+    if request.method == 'POST':
+        data = request.get_json(silent=True) or request.form.to_dict()
+    else:
+        data = request.args.to_dict()
+
+    cam_id = data.get('cam_id', data.get('channel', '2'))
+    start_str = data.get('start', data.get('start_time', ''))
+    end_str = data.get('end', data.get('end_time', ''))
+    event_time_str = data.get('time', '')
+    window_sec = int(data.get('window_sec', 30))
+
+    if event_time_str and not start_str:
+        ev_dt = nvr_playback.parse_datetime(event_time_str)
+        s_dt = ev_dt - timedelta(seconds=window_sec)
+        e_dt = ev_dt + timedelta(seconds=window_sec)
+    else:
+        now = datetime.now()
+        s_dt = nvr_playback.parse_datetime(start_str) if start_str else (now - timedelta(minutes=1))
+        e_dt = nvr_playback.parse_datetime(end_str) if end_str else now
+
+    success, res = nvr_playback.export_playback_clip(cam_id, s_dt, e_dt)
+    if success:
+        return jsonify({"success": True, "data": res})
+    else:
+        return jsonify({"success": False, "error": str(res)}), 400
+
+
+@app.route('/api/nvr/status')
+def api_nvr_status():
+    """Kiểm tra tình trạng kết nối tới Đầu ghi Dahua NVR"""
+    st = nvr_playback.test_nvr_connection()
+    cams = load_cameras_config()
+    st["registered_cameras"] = [
+        {
+            "id": c.get("id"),
+            "name": c.get("name"),
+            "nvr_channel": c.get("nvr_channel", nvr_playback.get_nvr_channel_for_cam(c.get("id"), c.get("name"), c.get("url"))),
+            "enabled": c.get("enabled", True),
+            "location": c.get("location", "")
+        }
+        for c in cams
+    ]
+    return jsonify({"success": True, "nvr": st})
+
+
+@app.route('/playback_clips/<path:filename>')
+def serve_playback_clip(filename):
+    """Phục vụ file video MP4 đã trích xuất từ NVR cho client tải về"""
+    resp = make_response(send_from_directory(nvr_playback.PLAYBACK_CLIPS_DIR, filename))
+    if filename.endswith('.mp4'):
+        resp.headers['Content-Type'] = 'video/mp4'
+    return resp
 
 
 @app.route('/api/status')
